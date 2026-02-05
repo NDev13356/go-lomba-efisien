@@ -6,7 +6,7 @@
     <div class="max-w-4xl mx-auto px-4 py-8">
         {{-- Header --}}
         <div class="bg-white rounded-2xl p-6 border border-slate-200 mb-6">
-            <div class="flex items-center justify-between">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div class="flex items-center gap-4">
                     <i class="fa-solid fa-user text-teal-500 text-2xl"></i>
                     <div>
@@ -24,7 +24,7 @@
         </div>
 
         {{-- Voting --}}
-        <div class="bg-white rounded-2xl p-8 border border-slate-200">
+        <div class="bg-white rounded-2xl p-6 md:p-8 border border-slate-200">
             <div class="text-center mb-8">
                 <i class="fa-solid fa-check-to-slot text-teal-500 text-4xl mb-4"></i>
                 <h2 class="text-2xl font-bold text-slate-800">Pilih Kandidat</h2>
@@ -33,7 +33,7 @@
 
             <form action="{{ route('siswa.vote') }}" method="POST" id="formVote">
                 @csrf
-                <div class="grid grid-cols-3 gap-6 mb-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                     @foreach ($kandidat as $k)
                         <label class="cursor-pointer group">
                             <input type="radio" name="id_kandidat" value="{{ $k->id_kandidat }}" class="peer hidden"
@@ -52,7 +52,7 @@
                                 </div>
                                 <h3 class="font-bold text-slate-800 mb-2">{{ $k->nama }}</h3>
                                 <div class="opacity-0 peer-checked:opacity-100">
-                                    <span class="bg-teal-500 text-white px-3 py-1 rounded-full text-sm">
+                                    <span class="bg-teal-100 text-teal-600 px-3 py-1 rounded-full text-sm">
                                         <i class="fa-solid fa-circle-check mr-1"></i>Dipilih
                                     </span>
                                 </div>

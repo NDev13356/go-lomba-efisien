@@ -5,7 +5,7 @@
 
 @section('content')
     {{-- Stats --}}
-    <div class="grid grid-cols-3 gap-6 mb-8">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <div class="bg-white rounded-2xl p-6 border border-slate-200">
             <div class="flex items-center gap-4">
                 <i class="fa-solid fa-user-tie text-teal-500 text-3xl"></i>

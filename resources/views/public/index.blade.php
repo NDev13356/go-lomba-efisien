@@ -8,15 +8,16 @@
         <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ asset('images/bg-hero.png') }}');">
         </div>
         <div class="absolute inset-0 bg-teal-900/80"></div>
-        <div class="relative mx-auto px-24 py-16 flex items-center gap-12">
-            <div class="flex-1">
-                <h1 class="text-5xl font-bold text-white leading-tight mb-4">
+        <div
+            class="relative mx-auto px-4 md:px-8 lg:px-24 py-12 md:py-16 flex flex-col md:flex-row items-center gap-8 md:gap-12">
+            <div class="flex-1 text-center md:text-left">
+                <h1 class="text-3xl md:text-5xl font-bold text-white leading-tight mb-4">
                     Pilih <span class="text-yellow-300">Pemimpin</span> untuk OSIS Kita
                 </h1>
-                <p class="text-white/80 mb-6 max-w-lg">
+                <p class="text-white/80 mb-6 max-w-lg mx-auto md:mx-0">
                     Gunakan hak suaramu untuk menentukan ketua OSIS yang akan membawa perubahan positif bagi sekolah kita.
                 </p>
-                <div class="flex gap-3">
+                <div class="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
                     @if (session()->has('siswa_nisn'))
                         <a href="{{ route('siswa.voting') }}"
                             class="bg-white text-teal-600 px-6 py-3 rounded-full font-bold hover:bg-slate-100">
@@ -34,15 +35,15 @@
                 </div>
             </div>
             <div class="flex-1 flex justify-center">
-                <img src="{{ asset('images/hero-image.png') }}" alt="Pilketos" class="max-w-md object-contain">
+                <img src="{{ asset('images/hero-image.png') }}" alt="Pilketos" class="max-w-xs md:max-w-md object-contain">
             </div>
         </div>
     </section>
 
     {{-- Stats & Results --}}
-    <section id="hasil" class="mx-auto px-24 py-8">
+    <section id="hasil" class="mx-auto px-4 md:px-8 lg:px-24 py-8">
         {{-- Stats Cards --}}
-        <div class="grid grid-cols-3 gap-6 mb-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             <div class="bg-white rounded-2xl p-6 border border-slate-200">
                 <div class="flex items-center gap-4">
                     <i class="fa-solid fa-check-to-slot text-teal-500 text-3xl"></i>
@@ -74,7 +75,7 @@
         </div>
 
         {{-- Kandidat Cards --}}
-        <div class="grid grid-cols-3 gap-6 mb-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
             @forelse($kandidat->sortBy('nomor_urut') as $index => $k)
                 <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 hover:shadow-lg transition">
                     <div class="relative aspect-square bg-teal-100 overflow-hidden">
@@ -107,7 +108,7 @@
                     </div>
                 </div>
             @empty
-                <div class="col-span-3 bg-white rounded-2xl p-12 text-center border border-slate-200">
+                <div class="col-span-full bg-white rounded-2xl p-12 text-center border border-slate-200">
                     <i class="fa-solid fa-user-slash text-5xl text-slate-300 mb-4"></i>
                     <p class="text-slate-400 text-lg">Belum ada kandidat terdaftar</p>
                 </div>
@@ -115,7 +116,7 @@
         </div>
 
         {{-- Chart Section --}}
-        <div class="grid grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div class="bg-white rounded-2xl p-6 border border-slate-200">
                 <h2 class="text-xl font-bold text-slate-800 mb-6">
                     <i class="fa-solid fa-chart-pie text-teal-500 mr-2"></i>Grafik Perolehan Suara
