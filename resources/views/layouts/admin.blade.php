@@ -30,14 +30,8 @@
 
             {{-- Main Content --}}
             <main class="p-4 md:p-8">
-                <div class="flex items-center justify-between mb-8">
-                    <div>
-                        <h1 class="text-2xl font-bold">@yield('title')</h1>
-                        <p class="text-base-content/60 text-sm">@yield('subtitle', 'Panel administrasi')</p>
-                    </div>
-                    <p class="text-sm text-base-content/60 hidden md:block">{{ now()->translatedFormat('l, d F Y') }}
-                    </p>
-                </div>
+                <h1 class="text-2xl font-bold">@yield('title')</h1>
+                <p class="text-base-content/60 text-sm mb-8">@yield('subtitle', 'Panel administrasi')</p>
 
                 @if (session('success'))
                     <div role="alert" class="alert alert-success mb-6">

@@ -4,31 +4,6 @@
 
 @section('content')
     <div class="max-w-4xl mx-auto px-4 py-8">
-        {{-- Header --}}
-        <div class="card bg-base-100 shadow-xl mb-6">
-            <div class="card-body">
-                <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
-                    <div class="flex items-center gap-4">
-                        <div class="avatar placeholder">
-                            <div class="bg-primary text-primary-content w-12 rounded-full">
-                                <i class="fa-solid fa-user"></i>
-                            </div>
-                        </div>
-                        <div>
-                            <h1 class="font-bold">{{ $siswa->nama }}</h1>
-                            <p class="text-base-content/60 text-sm">NISN: {{ $siswa->nisn }}</p>
-                        </div>
-                    </div>
-                    <form action="{{ route('siswa.logout') }}" method="POST">
-                        @csrf
-                        <button class="btn btn-ghost text-error">
-                            <i class="fa-solid fa-right-from-bracket"></i>Logout
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-
         {{-- Voting --}}
         <div class="card bg-base-100 shadow-xl">
             <div class="card-body">
