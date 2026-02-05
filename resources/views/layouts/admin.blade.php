@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" data-theme="light">
 
 <head>
     <meta charset="UTF-8">
@@ -9,102 +9,103 @@
     <script src="{{ asset('js/chart.min.js') }}"></script>
 </head>
 
-<body class="bg-slate-50 min-h-screen font-sans">
-    <div class="flex">
-        {{-- Mobile Header --}}
-        <div
-            class="lg:hidden fixed top-0 left-0 right-0 bg-white border-b z-40 px-4 py-3 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-                <i class="fa-solid fa-shield-halved text-teal-500 text-xl"></i>
-                <span class="font-bold text-slate-800">Admin</span>
+<body class="bg-base-200 min-h-screen font-sans">
+    <div class="drawer lg:drawer-open">
+        <input id="sidebar" type="checkbox" class="drawer-toggle" />
+
+        {{-- Page Content --}}
+        <div class="drawer-content">
+            {{-- Mobile Header --}}
+            <div class="navbar bg-base-100 border-b lg:hidden">
+                <div class="navbar-start">
+                    <label for="sidebar" class="btn btn-ghost drawer-button">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </label>
+                </div>
+                <div class="navbar-center">
+                    <span class="font-bold">Admin Panel</span>
+                </div>
+                <div class="navbar-end"></div>
             </div>
-            <button id="sidebarToggle" class="text-slate-600">
-                <i class="fa-solid fa-bars text-xl"></i>
-            </button>
+
+            {{-- Main Content --}}
+            <main class="p-4 md:p-8">
+                <div class="flex items-center justify-between mb-8">
+                    <div>
+                        <h1 class="text-2xl font-bold">@yield('title')</h1>
+                        <p class="text-base-content/60 text-sm">@yield('subtitle', 'Panel administrasi')</p>
+                    </div>
+                    <p class="text-sm text-base-content/60 hidden md:block">{{ now()->translatedFormat('l, d F Y') }}
+                    </p>
+                </div>
+
+                @if (session('success'))
+                    <div role="alert" class="alert alert-success mb-6">
+                        <i class="fa-solid fa-circle-check"></i>
+                        <span>{{ session('success') }}</span>
+                    </div>
+                @endif
+
+                @yield('content')
+            </main>
         </div>
 
-        {{-- Overlay --}}
-        <div id="sidebarOverlay" class="hidden fixed inset-0 bg-black/50 z-40 lg:hidden"></div>
-
         {{-- Sidebar --}}
-        <aside id="sidebar"
-            class="w-64 bg-white min-h-screen fixed border-r z-50 transform -translate-x-full lg:translate-x-0 transition-transform">
-            <div class="p-6 border-b">
-                <div class="flex items-center gap-2">
-                    <i class="fa-solid fa-shield-halved text-teal-500 text-2xl"></i>
-                    <span class="font-bold text-lg text-slate-800">Admin Panel</span>
+        <div class="drawer-side z-50">
+            <label for="sidebar" class="drawer-overlay"></label>
+            <aside class="bg-base-100 min-h-screen w-64 border-r flex flex-col">
+                {{-- Logo --}}
+                <div class="p-6 border-b">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-shield-halved text-primary text-2xl"></i>
+                        <span class="font-bold text-lg">Admin Panel</span>
+                    </div>
                 </div>
-            </div>
 
-            <nav class="p-4 space-y-1">
-                <a href="{{ route('admin.dashboard') }}"
-                    class="flex items-center gap-3 px-4 py-3 rounded-xl {{ request()->routeIs('admin.dashboard') ? 'bg-teal-500 text-white' : 'text-slate-600 hover:bg-slate-100' }}">
-                    <i class="fa-solid fa-home w-5"></i>
-                    <span>Dashboard</span>
-                </a>
-                <a href="{{ route('admin.kandidat.index') }}"
-                    class="flex items-center gap-3 px-4 py-3 rounded-xl {{ request()->routeIs('admin.kandidat.*') ? 'bg-teal-500 text-white' : 'text-slate-600 hover:bg-slate-100' }}">
-                    <i class="fa-solid fa-user-tie w-5"></i>
-                    <span>Kandidat</span>
-                </a>
-                <a href="{{ route('admin.siswa.index') }}"
-                    class="flex items-center gap-3 px-4 py-3 rounded-xl {{ request()->routeIs('admin.siswa.*') ? 'bg-teal-500 text-white' : 'text-slate-600 hover:bg-slate-100' }}">
-                    <i class="fa-solid fa-users w-5"></i>
-                    <span>Siswa</span>
-                </a>
-                <a href="{{ route('admin.admin.index') }}"
-                    class="flex items-center gap-3 px-4 py-3 rounded-xl {{ request()->routeIs('admin.admin.*') ? 'bg-teal-500 text-white' : 'text-slate-600 hover:bg-slate-100' }}">
-                    <i class="fa-solid fa-user-shield w-5"></i>
-                    <span>Admin</span>
-                </a>
-            </nav>
+                {{-- Menu --}}
+                <ul class="menu p-4 flex-1">
+                    <li>
+                        <a href="{{ route('admin.dashboard') }}"
+                            class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+                            <i class="fa-solid fa-home"></i>Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.kandidat.index') }}"
+                            class="{{ request()->routeIs('admin.kandidat.*') ? 'active' : '' }}">
+                            <i class="fa-solid fa-user-tie"></i>Kandidat
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.siswa.index') }}"
+                            class="{{ request()->routeIs('admin.siswa.*') ? 'active' : '' }}">
+                            <i class="fa-solid fa-users"></i>Siswa
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.admin.index') }}"
+                            class="{{ request()->routeIs('admin.admin.*') ? 'active' : '' }}">
+                            <i class="fa-solid fa-user-shield"></i>Admin
+                        </a>
+                    </li>
+                </ul>
 
-            <div class="absolute bottom-0 left-0 right-0 p-4 border-t bg-slate-50">
-                <a href="{{ route('public.index') }}" target="_blank"
-                    class="block text-center text-slate-500 hover:text-teal-500 py-2 text-sm">
-                    <i class="fa-solid fa-arrow-up-right-from-square mr-1"></i>Lihat Website
-                </a>
-                <form action="{{ route('admin.logout') }}" method="POST">
-                    @csrf
-                    <button class="w-full bg-red-500 text-white py-3 rounded-xl hover:bg-red-600">
-                        <i class="fa-solid fa-right-from-bracket mr-2"></i>Logout
-                    </button>
-                </form>
-            </div>
-        </aside>
-
-        {{-- Main --}}
-        <main class="lg:ml-64 flex-1 p-4 md:p-8 pt-20 lg:pt-8">
-            <div class="flex items-center justify-between mb-8">
-                <div>
-                    <h1 class="text-2xl font-bold text-slate-800">@yield('title')</h1>
-                    <p class="text-slate-400 text-sm">@yield('subtitle', 'Panel administrasi')</p>
+                {{-- Footer --}}
+                <div class="p-4 border-t">
+                    <a href="{{ route('public.index') }}" target="_blank" class="btn btn-ghost btn-sm w-full mb-2">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>Lihat Website
+                    </a>
+                    <form action="{{ route('admin.logout') }}" method="POST">
+                        @csrf
+                        <button class="btn btn-error w-full">
+                            <i class="fa-solid fa-right-from-bracket"></i>Logout
+                        </button>
+                    </form>
                 </div>
-                <p class="text-sm text-slate-400 hidden md:block">{{ now()->translatedFormat('l, d F Y') }}</p>
-            </div>
-
-            @if (session('success'))
-                <div class="bg-emerald-50 border border-emerald-200 text-emerald-700 p-4 rounded-xl mb-6">
-                    <i class="fa-solid fa-circle-check mr-2"></i>{{ session('success') }}
-                </div>
-            @endif
-
-            @yield('content')
-        </main>
+            </aside>
+        </div>
     </div>
 
-    <script>
-        const sidebar = document.getElementById('sidebar');
-        const overlay = document.getElementById('sidebarOverlay');
-        document.getElementById('sidebarToggle')?.addEventListener('click', () => {
-            sidebar.classList.remove('-translate-x-full');
-            overlay.classList.remove('hidden');
-        });
-        overlay?.addEventListener('click', () => {
-            sidebar.classList.add('-translate-x-full');
-            overlay.classList.add('hidden');
-        });
-    </script>
     @stack('scripts')
 </body>
 

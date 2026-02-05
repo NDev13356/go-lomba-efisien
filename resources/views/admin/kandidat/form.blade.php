@@ -4,49 +4,52 @@
 @section('subtitle', $kandidat ? 'Perbarui data kandidat' : 'Daftarkan kandidat baru')
 
 @section('content')
-    <a href="{{ route('admin.kandidat.index') }}" class="text-slate-500 hover:text-teal-500 mb-6 inline-block">
-        <i class="fa-solid fa-arrow-left mr-2"></i>Kembali
+    <a href="{{ route('admin.kandidat.index') }}" class="btn btn-ghost btn-sm mb-6">
+        <i class="fa-solid fa-arrow-left"></i>Kembali
     </a>
 
-    <div class="bg-white rounded-2xl p-8 border border-slate-200 max-w-xl">
-        <form
-            action="{{ $kandidat ? route('admin.kandidat.update', $kandidat->id_kandidat) : route('admin.kandidat.store') }}"
-            method="POST" enctype="multipart/form-data">
-            @csrf
-            @if ($kandidat)
-                @method('PUT')
-            @endif
-
-            <div class="mb-6">
-                <label class="block text-sm font-semibold text-slate-700 mb-2">Nama Kandidat</label>
-                <input type="text" name="nama" value="{{ old('nama', $kandidat->nama ?? '') }}" required
-                    class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500"
-                    placeholder="Nama lengkap">
-                @error('nama')
-                    <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
-                @enderror
-            </div>
-
-            <div class="mb-8">
-                <label class="block text-sm font-semibold text-slate-700 mb-2">Foto Kandidat</label>
-                @if ($kandidat && $kandidat->foto)
-                    <div class="mb-4 flex items-center gap-4">
-                        <img src="{{ asset('storage/kandidat/' . $kandidat->foto) }}"
-                            class="w-20 h-20 rounded-xl object-cover">
-                        <span class="text-slate-400 text-sm">Foto saat ini</span>
-                    </div>
+    <div class="card bg-base-100 shadow-xl max-w-xl">
+        <div class="card-body">
+            <form
+                action="{{ $kandidat ? route('admin.kandidat.update', $kandidat->id_kandidat) : route('admin.kandidat.store') }}"
+                method="POST" enctype="multipart/form-data">
+                @csrf
+                @if ($kandidat)
+                    @method('PUT')
                 @endif
-                <input type="file" name="foto" accept="image/*"
-                    class="w-full px-4 py-3 border border-slate-200 rounded-xl file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-teal-100 file:text-teal-600">
-                @error('foto')
-                    <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
-                @enderror
-            </div>
 
-            <button type="submit" class="w-full bg-teal-500 text-white py-4 rounded-xl font-semibold hover:bg-teal-600">
-                <i
-                    class="fa-solid fa-{{ $kandidat ? 'floppy-disk' : 'plus' }} mr-2"></i>{{ $kandidat ? 'Simpan' : 'Tambah' }}
-            </button>
-        </form>
+                <div class="form-control mb-4">
+                    <label class="label"><span class="label-text font-semibold">Nama Kandidat</span></label>
+                    <input type="text" name="nama" value="{{ old('nama', $kandidat->nama ?? '') }}" required
+                        class="input input-bordered" placeholder="Nama lengkap">
+                    @error('nama')
+                        <p class="text-error text-sm mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div class="form-control mb-6">
+                    <label class="label"><span class="label-text font-semibold">Foto Kandidat</span></label>
+                    @if ($kandidat && $kandidat->foto)
+                        <div class="flex items-center gap-4 mb-3">
+                            <div class="avatar">
+                                <div class="w-20 rounded-xl">
+                                    <img src="{{ asset('storage/kandidat/' . $kandidat->foto) }}" alt="Foto saat ini">
+                                </div>
+                            </div>
+                            <span class="text-base-content/60 text-sm">Foto saat ini</span>
+                        </div>
+                    @endif
+                    <input type="file" name="foto" accept="image/*" class="file-input file-input-bordered w-full">
+                    @error('foto')
+                        <p class="text-error text-sm mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <button type="submit" class="btn btn-primary w-full">
+                    <i class="fa-solid fa-{{ $kandidat ? 'floppy-disk' : 'plus' }}"></i>
+                    {{ $kandidat ? 'Simpan' : 'Tambah' }}
+                </button>
+            </form>
+        </div>
     </div>
 @endsection

@@ -5,43 +5,39 @@
 
 @section('content')
     {{-- Stats --}}
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <div class="bg-white rounded-2xl p-6 border border-slate-200">
-            <div class="flex items-center gap-4">
-                <i class="fa-solid fa-user-tie text-teal-500 text-3xl"></i>
-                <div>
-                    <div class="text-3xl font-bold text-slate-800">{{ $totalKandidat }}</div>
-                    <div class="text-slate-400 text-sm">Total Kandidat</div>
-                </div>
+    <div class="stats stats-vertical md:stats-horizontal shadow w-full mb-8">
+        <div class="stat">
+            <div class="stat-figure text-primary">
+                <i class="fa-solid fa-user-tie text-3xl"></i>
             </div>
+            <div class="stat-title">Total Kandidat</div>
+            <div class="stat-value text-primary">{{ $totalKandidat }}</div>
         </div>
-        <div class="bg-white rounded-2xl p-6 border border-slate-200">
-            <div class="flex items-center gap-4">
-                <i class="fa-solid fa-users text-teal-500 text-3xl"></i>
-                <div>
-                    <div class="text-3xl font-bold text-slate-800">{{ $totalSiswa }}</div>
-                    <div class="text-slate-400 text-sm">Total Siswa</div>
-                </div>
+        <div class="stat">
+            <div class="stat-figure text-primary">
+                <i class="fa-solid fa-users text-3xl"></i>
             </div>
+            <div class="stat-title">Total Siswa</div>
+            <div class="stat-value text-primary">{{ $totalSiswa }}</div>
         </div>
-        <div class="bg-white rounded-2xl p-6 border border-slate-200">
-            <div class="flex items-center gap-4">
-                <i class="fa-solid fa-check-to-slot text-teal-500 text-3xl"></i>
-                <div>
-                    <div class="text-3xl font-bold text-slate-800">{{ $totalSuara }}</div>
-                    <div class="text-slate-400 text-sm">Suara Masuk</div>
-                </div>
+        <div class="stat">
+            <div class="stat-figure text-primary">
+                <i class="fa-solid fa-check-to-slot text-3xl"></i>
             </div>
+            <div class="stat-title">Suara Masuk</div>
+            <div class="stat-value text-primary">{{ $totalSuara }}</div>
         </div>
     </div>
 
     {{-- Chart --}}
-    <div class="bg-white rounded-2xl p-6 border border-slate-200">
-        <h2 class="font-bold text-slate-800 mb-6">
-            <i class="fa-solid fa-chart-bar text-teal-500 mr-2"></i>Perolehan Suara
-        </h2>
-        <div class="h-72">
-            <canvas id="chart"></canvas>
+    <div class="card bg-base-100 shadow-xl">
+        <div class="card-body">
+            <h2 class="card-title">
+                <i class="fa-solid fa-chart-bar text-primary"></i>Perolehan Suara
+            </h2>
+            <div class="h-72">
+                <canvas id="chart"></canvas>
+            </div>
         </div>
     </div>
 
